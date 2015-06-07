@@ -11,6 +11,10 @@ class Node:
         self.procedure = procedure
 
         self.built_with = ""
+    
+    def __repr__(self):
+	return "name: " + repr(self.name) + "sources: " + repr(self.sources) + "targets: " + repr(self.targets) + "procedure: " + repr(self.procedure)
+
 
     def multihash(self, nodes):
         return reduce(str.__add__, map(lambda node: node.hash(), nodes))
@@ -47,7 +51,6 @@ class File:
 
     def hash(self):
         return md5.md5(self.contents()).hexdigest()
-
 
 
 buildline = "c++ test.cpp -I/usr/local/Cellar/sdl/1.2.15/include/SDL /usr/local/Cellar/sdl/1.2.15/lib/libSDL.a /usr/local/Cellar/sdl/1.2.15/lib/libSDLmain.a -framework Cocoa -framework OpenGL -framework AudioUnit -framework IOKit -framework Carbon -o test"
