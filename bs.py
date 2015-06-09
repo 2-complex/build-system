@@ -13,7 +13,7 @@ class Node:
         self.built_with = ""
     
     def __repr__(self):
-	return "name: " + repr(self.name) + "sources: " + repr(self.sources) + "targets: " + repr(self.targets) + "procedure: " + repr(self.procedure)
+	return "name: " + repr(self.name) + "  sources: " + repr(self.sources) + "  targets: " + repr(self.targets) + "  procedure: " + repr(self.procedure)
 
 
     def multihash(self, nodes):
@@ -40,6 +40,9 @@ class File:
         self.targets = []
         self.procedure = ""
 
+    def __repr__(self):
+	return "file: " + repr(self.name)
+
     def update(self):
         pass
 
@@ -53,8 +56,19 @@ class File:
         return md5.md5(self.contents()).hexdigest()
 
 
-buildline = "c++ test.cpp -I/usr/local/Cellar/sdl/1.2.15/include/SDL /usr/local/Cellar/sdl/1.2.15/lib/libSDL.a /usr/local/Cellar/sdl/1.2.15/lib/libSDLmain.a -framework Cocoa -framework OpenGL -framework AudioUnit -framework IOKit -framework Carbon -o test"
-testnode = Node( "test", [File("test.cpp")], [File("test")], buildline )
+def resolve(nodeList):
+    fileNameToFileObj = {}
+    for node in nodeList:
+        for s in node.sources:
+            if not fileNameToFileObj.has_key(s):
+            	fileNameToFileObj[s] = File(s)
+    for node in nodeList:
+        node.sources = map(lambda s:fileNameToFileObj[s], node.sources)
+
+    for n in nodeList:
+        print n
+
 
 testnode.update()
+
 
