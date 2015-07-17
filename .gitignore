@@ -1,5 +1,8 @@
+history.json
 test
 *.pyc
 *.o
 *.exe
+*.int
+poem
 
