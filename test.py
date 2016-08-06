@@ -13,9 +13,11 @@ def display():
 
 l['poem'].restore("history.json")
 
+print ""
 print "before update"
 display()
 l['poem'].update()
+print ""
 print "after update"
 display()
 

@@ -8,7 +8,8 @@ def execute_command(line):
     status = commands.getstatusoutput(line)
 
 def multihash(nodes):
-    return md5.md5(reduce(str.__add__, map(lambda node: node.hash(), nodes), "")).hexdigest() ## 
+    return md5.md5(reduce(str.__add__, map(
+            lambda node: node.hash(), nodes), "")).hexdigest()
 
 class File:
     def __init__(self, name, sources, procedure):
@@ -21,7 +22,7 @@ class File:
         return self._name
 
     def __repr__(self):
-	return self.name()
+        return self.name()
 
     def procedure_lines(self):
         return filter(bool, map(lambda s: s.strip(), self.procedure))
@@ -120,7 +121,7 @@ def resolve(map_list):
             return n
         node = name_to_node[name]
         node.sources = map(resolve_single, node.sources)
-    	result.append(node)
+        result.append(node)
     return {node.name() : node for node in result}
 
 
