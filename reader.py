@@ -1,11 +1,13 @@
 
 from bs import *
+import re
 
-def list_split(inString):
-    return map(lambda x:x.strip(), inString.split(','))
+def list_split(s):
+    return map(lambda x:x.strip(), s.split(','))
 
-def proc_split(inString):
-    return map(lambda x:x.strip(), inString.replace(';', '\n').split('\n'))
+def proc_split(s):
+    return map(lambda x:x.strip(),
+        re.sub("\\\\\s*", " ", s).replace(';', '\n').split('\n'))
 
 def read_buildfile(path):
     f = open(path, 'r')
