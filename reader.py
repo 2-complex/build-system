@@ -40,4 +40,3 @@ def read_buildfile(path):
 
     return map_list
 
-

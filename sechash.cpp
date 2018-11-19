@@ -222,7 +222,7 @@ int main(int argc, char** args)
 {
     if( argc != 2 )
     {
-        printf("wrong number of args, takes filepath\n");
+        fprintf(stderr, "wrong number of args, takes filepath\n");
     }
     else
     {
@@ -236,23 +236,23 @@ int main(int argc, char** args)
             switch(hash.getError())
             {
                 case NO_ERROR:
-                    printf("What?  No error?\n");
+                    fprintf(stderr, "What?  No error?\n");
                 break;
 
                 case FILE_NOT_FOUND:
-                    printf("File not found.\n");
+                    fprintf(stderr, "File not found.\n");
                 break;
 
                 case FILE_NOT_FULLY_READ:
-                    printf("File not fully read.\n");
+                    fprintf(stderr, "File not fully read.\n");
                 break;
 
                 case SHA_ERROR:
-                    printf("SHA512 computation failed.\n");
+                    fprintf(stderr, "SHA512 computation failed.\n");
                 break;
 
                 default:
-                    printf("Unknown error.\n");
+                    fprintf(stderr, "Unknown error.\n");
                 break;
             }
         }

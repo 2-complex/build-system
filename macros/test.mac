@@ -1,0 +1,40 @@
+compile_o(x)
+{
+    "c++ -c " x ".cpp"
+};
+
+compile_exe(obj, x)
+{
+    "c++ " obj " " x ".cpp -o "x".exe"
+};
+
+MATH_SOURCE =
+[
+    "math.cpp",
+    "math.h",
+];
+
+PHYSICS_SOURCE =
+[
+    "physics.cpp",
+    "physics.h",
+    "math.h",
+];
+
+GAME_SOURCE =
+[
+    "game.cpp",
+    "game.h",
+    "physics.h",
+    "math.h",
+];
+
+GAME_OBJ =
+[
+    "math.o",
+    "phyics.o",
+];
+
+["math.o"] < MATH_SOURCE < compile_o("math");
+["physics.o"] < PHYSICS_SOURCE < compile_o("physics");
+["game.exe"] < GAME_SOURCE < compile_exe(GAME_OBJ, "physics");
